@@ -10,6 +10,8 @@ import kz.ablazim.itbookstore.data.cache.BooksCacheDataSource
 import kz.ablazim.itbookstore.data.cache.BooksCacheMapper
 import kz.ablazim.itbookstore.data.cache.RoomProvider
 import retrofit2.Retrofit
+import kz.ablazim.itbookstore.domain.BaseBooksDataToDomainMapper
+import kz.ablazim.itbookstore.domain.BooksInteractor
 
 class ITBookStoreApp : Application() {
 
@@ -35,5 +37,6 @@ class ITBookStoreApp : Application() {
             booksCloudMapper,
             booksCacheMapper
         )
+        val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
     }
 }
