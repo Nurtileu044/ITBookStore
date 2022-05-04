@@ -12,6 +12,10 @@ import kz.ablazim.itbookstore.data.cache.RoomProvider
 import retrofit2.Retrofit
 import kz.ablazim.itbookstore.domain.BaseBooksDataToDomainMapper
 import kz.ablazim.itbookstore.domain.BooksInteractor
+import kz.ablazim.itbookstore.presentation.BaseBooksDomainToUiMapper
+import kz.ablazim.itbookstore.presentation.BooksCommunication
+import kz.ablazim.itbookstore.presentation.MainViewModel
+import kz.ablazim.itbookstore.presentation.ResourceProvider
 
 class ITBookStoreApp : Application() {
 
@@ -19,6 +23,7 @@ class ITBookStoreApp : Application() {
         const val BASE_URL = "https://api.itbook.store/1.0/"
     }
 
+    lateinit var mainViewModel: MainViewModel
     override fun onCreate() {
         super.onCreate()
 
@@ -38,5 +43,9 @@ class ITBookStoreApp : Application() {
             booksCacheMapper
         )
         val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
+        mainViewModel = MainViewModel(
+            booksInteractor,
+            BaseBooksDomainToUiMapper(BooksCommunication.Base(), ResourceProvider.Base(this))
+        )
     }
 }
