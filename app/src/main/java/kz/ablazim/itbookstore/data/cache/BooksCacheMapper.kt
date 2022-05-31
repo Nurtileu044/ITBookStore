@@ -5,12 +5,12 @@ import kz.ablazim.itbookstore.core.BooksInfo
 
 interface BooksCacheMapper : Abstract.Mapper {
 
-    fun map(booksDbEntity: List<BookDbEntity>): BooksInfo
+    fun map(booksDb: List<BookDb>): BooksInfo
 
-    class Base(private val bookDbEntityMapper: BookDbEntityMapper) : BooksCacheMapper {
-        override fun map(booksDbEntity: List<BookDbEntity>): BooksInfo {
-            val bookList = booksDbEntity.map { bookDb ->
-                bookDbEntityMapper.map(bookDb)
+    class Base(private val bookDbMapper: BookDbMapper) : BooksCacheMapper {
+        override fun map(booksDb: List<BookDb>): BooksInfo {
+            val bookList = booksDb.map { bookDb ->
+                bookDbMapper.map(bookDb)
             }
             return BooksInfo(total = "0", books = bookList)
         }

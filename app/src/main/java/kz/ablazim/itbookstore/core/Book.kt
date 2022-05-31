@@ -1,5 +1,6 @@
 package kz.ablazim.itbookstore.core
 
+// TODO don't push it
 data class Book(
     val id: String,
     val title: String,

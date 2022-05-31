@@ -6,15 +6,14 @@ import kz.ablazim.itbookstore.presentation.BooksUi
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-// TODO rename to BooksDomain by lead
-sealed class BookDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper>() {
-    class Success(private val booksInfo: BooksInfo) : BookDomain() {
+sealed class BooksDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper>() {
+    class Success(private val booksInfo: BooksInfo) : BooksDomain() {
         override fun map(mapper: BooksDomainToUiMapper): BooksUi {
             return mapper.map(booksInfo)
         }
     }
 
-    class Fail(private val exception: Exception) : BookDomain() {
+    class Fail(private val exception: Exception) : BooksDomain() {
         override fun map(mapper: BooksDomainToUiMapper): BooksUi {
             val errorType = when (exception) {
                 is UnknownHostException -> ErrorType.NO_CONNECTION
