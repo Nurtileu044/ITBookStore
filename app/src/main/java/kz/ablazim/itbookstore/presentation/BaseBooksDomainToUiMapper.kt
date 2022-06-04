@@ -7,8 +7,7 @@ import kz.ablazim.itbookstore.domain.ErrorType
 class BaseBooksDomainToUiMapper(
     private val communication: BooksCommunication,
     private val resourceProvider: ResourceProvider
-) :
-    BooksDomainToUiMapper {
+) : BooksDomainToUiMapper {
     override fun map(booksInfo: BooksInfo): BooksUi {
         return BooksUi.Success(communication, booksInfo)
     }

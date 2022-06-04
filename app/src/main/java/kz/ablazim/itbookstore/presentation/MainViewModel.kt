@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kz.ablazim.itbookstore.core.Abstract
 import kz.ablazim.itbookstore.core.BooksInfo
 import kz.ablazim.itbookstore.domain.BooksDomainToUiMapper
 import kz.ablazim.itbookstore.domain.BooksInteractor
@@ -17,10 +19,11 @@ class MainViewModel(
 ) : ViewModel() { // TODO: interface
 
     fun fetchBooks() = viewModelScope.launch(Dispatchers.IO) {
-        val result = booksInteractor.fetchBooks()
+        val resultDomain = booksInteractor.fetchBooks()
 
-        Dispatchers.Main.run {
-            result.map(mapper)
+        withContext(Dispatchers.Main) {
+            val resultUi = resultDomain.map(mapper)
+            resultUi.map(Abstract.Mapper.Empty())
         }
     }
 

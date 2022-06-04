@@ -1,6 +1,7 @@
 package kz.ablazim.itbookstore.core
 
 import android.app.Application
+import io.realm.Realm
 import kz.ablazim.itbookstore.data.BooksRepository
 import kz.ablazim.itbookstore.data.api.BookCloudMapper
 import kz.ablazim.itbookstore.data.api.BookService
@@ -16,6 +17,7 @@ import kz.ablazim.itbookstore.presentation.BooksCommunication
 import kz.ablazim.itbookstore.presentation.MainViewModel
 import kz.ablazim.itbookstore.presentation.ResourceProvider
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ITBookStoreApp : Application() {
 
@@ -27,8 +29,10 @@ class ITBookStoreApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Realm.init(this)
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(BookService::class.java)
 

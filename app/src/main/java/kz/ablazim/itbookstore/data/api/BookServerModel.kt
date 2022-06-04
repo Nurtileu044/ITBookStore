@@ -5,6 +5,8 @@ import kz.ablazim.itbookstore.core.Abstract
 import kz.ablazim.itbookstore.core.BooksInfo
 
 data class BookServerModel(
+    @SerializedName("error")
+    val error: String,
     @SerializedName("total")
     val total: String,
     @SerializedName("books")

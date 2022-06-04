@@ -4,6 +4,6 @@ import retrofit2.http.GET
 
 interface BookService {
 
-    @GET("/new")
+    @GET("new")
     suspend fun fetchBooks() : BookServerModel
 }
