@@ -3,7 +3,6 @@ package kz.ablazim.itbookstore.data.api
 import kz.ablazim.itbookstore.core.Abstract
 import kz.ablazim.itbookstore.core.Book
 import kz.ablazim.itbookstore.core.BooksInfo
-import java.util.*
 
 interface BookCloudMapper : Abstract.Mapper {
 
@@ -13,7 +12,7 @@ interface BookCloudMapper : Abstract.Mapper {
         override fun map(total: String, books: List<BookServerDetailModel>): BooksInfo {
             val bookList = books.map {
                 Book(
-                    id = UUID.randomUUID().toString(),
+                    id = "0", //UUID.randomUUID().toString(),
                     title = it.title,
                     isbn = it.isbn,
                     price = it.price,
